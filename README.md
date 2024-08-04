@@ -1,48 +1,38 @@
-Django Installation
+
+
+## Django Installation
+
 ตรวจสอบว่ามีการติดตั้ง Python แล้วในเครื่อง
 Windows & MacOS
 
-- Open the Command Prompt / Terminal
-- Enter the command
-> py --version
-Results
+    py --version
+    python --version
+## Windows
+**Install virtualenv**
 
-> python --version
-Python 3.9.13
-สร้าง folder สำหรับใส่ project เช่น My Documents\Projects\week-2
+    pip install virtualenv
 
-เข้าไปที่ folder
+**Create a virtual environment**
 
-Setup a virtual environment
+    py -m venv myvenv
 
-Windows
+**Activate virtual environment**
 
-# Install virtualenv
-> pip install virtualenv
+    myvenv\Scripts\activate.bat
 
-# Create a virtual environment
-> py -m venv myvenv
+**Install Django**
 
-# Activate virtual environment
-> myvenv\Scripts\activate.bat
-MacOS
+    pip install django
 
-# Install virtualenv
-> pip install virtualenv
-
-# Create a virtual environment
-> python -m venv myvenv
-
-# Activate virtual environment
-> source myvenv/bin/activate
-เมื่อทำเสร็จคุณจะเห็นว่ามี folder myvenv เพิ่มขึ้นมา
-
-Install Django
-Windows & MacOS
-
-> pip install django
 ตรวจสอบว่า install สำเร็จหรือไม่ด้วย command
 
-> python -m django --version
-4.2.13
+    python -m django --version
+**สร้าง project ชื่อ  `mysite`  ด้วย command**
 
+    django-admin startproject mysite
+**Runserver**
+
+    python manage.py runserver
+**ทำการสร้าง Apps**
+
+    python manage.py startapp polls
