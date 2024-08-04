@@ -10,6 +10,20 @@ class MyModel(models.Model):
     date_field = models.DateTimeField(auto_now_add=True)
 ```
 
+#insert relate table
+# สร้างนักเขียน
+author1 = Author.objects.create(name='Author One')
+author2 = Author.objects.create(name='Author Two')
+
+# สร้างหนังสือ
+book1 = Book.objects.create(title='Book One')
+book2 = Book.objects.create(title='Book Two')
+
+# เชื่อมโยงนักเขียนกับหนังสือ
+book1.authors.add(author1, author2)  # Book One เขียนโดย Author One และ Author Two
+book2.authors.add(author1)           # Book Two เขียนโดย Author One
+
+
 ## Queryset Basics
 
 ```python
