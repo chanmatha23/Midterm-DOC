@@ -59,6 +59,7 @@
     {# <button  type="submit"  onclick="deleteProject({{ }})"  class="delete">Delete</button> #}
 ### Views in Ex
 
+    from  django.http  import  JsonResponse
     class  ProjectDetail(View):
 	    def  get(self, request, id):
 		    pro  =  Project.objects.get(pk=id)
