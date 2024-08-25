@@ -1,35 +1,40 @@
 
+![enter image description here](https://cms.dmpcdn.com/horoscope/2023/10/16/e0369f30-6bdb-11ee-8cd0-a9bfd91f001c_webp_original.webp)
 
-## Django Installation
-# Install virtualenv
+## Install virtualenv
 
-```python
-pip install virtualenv
-python -m venv myvenv
-myvenv\Scripts\activate.bat
 
-#New Django project
-pip install django
-django-admin startproject myshop
-python manage.py startapp shop 
-#start server: python manage.py runserver
+    pip install virtualenv
+    python -m venv myvenv
+    myvenv\Scripts\activate.bat
 
-#Postgres client
-pip install psycopg2-binary
+### New Django project
 
-#Jupyter Notebook
-pip install django-extensions ipython jupyter notebook   
-pip install ipython==8.25.0 jupyter_server==2.14.1 jupyterlab==4.2.2 jupyterlab_server==2.27.2
-pip install notebook==6.5.6 #or 6.5.7
-mkdir notebooks
-python manage.py shell_plus --notebook
+    pip install django
+    django-admin startproject myshop
+    python manage.py startapp shop 
+    #start server: python manage.py runserver
 
-#Startup
-python manage.py migrate
-python manage.py makemigrations
-```
+### Postgres client
 
-# Projects Settings
+    pip install psycopg2-binary
+
+### Jupyter Notebook
+
+    pip install django-extensions ipython jupyter notebook   
+    pip install ipython==8.25.0 jupyter_server==2.14.1 jupyterlab==4.2.2 jupyterlab_server==2.27.2
+    pip install notebook==6.5.6 #or 6.5.7
+    mkdir notebooks
+    python manage.py shell_plus --notebook
+
+### Startup
+
+    python manage.py migrate
+    python manage.py makemigrations
+
+
+
+### Projects Settings
 
 project_name/urls.py
 
@@ -81,7 +86,7 @@ STATICFILES_DIRS = [
 ]
 ```
 
-# jupyter notebook
+### jupyter notebook
 
 ```python
 import os
