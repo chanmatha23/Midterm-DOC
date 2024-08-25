@@ -1,0 +1,98 @@
+* {
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: #466bff;
+  color: white;
+  padding: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.itemGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.item .action {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+button,
+.btn {
+  padding: 10px 15px;
+  background-color: #466bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.btn.edit,
+button.edit {
+  background-color: #f39c12;
+}
+
+.btn.delete,
+button.delete {
+  background-color: #e74c3c;
+}
+
+input,
+select,
+textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.form input {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+}
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #ffffff;
+}
