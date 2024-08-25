@@ -1,38 +1,98 @@
 
 
 ## Django Installation
+# Install virtualenv
 
-ตรวจสอบว่ามีการติดตั้ง Python แล้วในเครื่อง
-Windows & MacOS
+```python
+pip install virtualenv
+python -m venv myvenv
+myvenv\Scripts\activate.bat
 
-    py --version
-    python --version
-## Windows
-**Install virtualenv**
+#New Django project
+pip install django
+django-admin startproject myshop
+python manage.py startapp shop 
+#start server: python manage.py runserver
 
-    pip install virtualenv
+#Postgres client
+pip install psycopg2-binary
 
-**Create a virtual environment**
+#Jupyter Notebook
+pip install django-extensions ipython jupyter notebook   
+pip install ipython==8.25.0 jupyter_server==2.14.1 jupyterlab==4.2.2 jupyterlab_server==2.27.2
+pip install notebook==6.5.6 #or 6.5.7
+mkdir notebooks
+python manage.py shell_plus --notebook
 
-    py -m venv myvenv
+#Startup
+python manage.py migrate
+python manage.py makemigrations
+```
 
-**Activate virtual environment**
+# Projects Settings
 
-    myvenv\Scripts\activate.bat
+project_name/urls.py
 
-**Install Django**
+```python
+from django.contrib import admin
+from django.urls import include, path
 
-    pip install django
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path("", include("employee.urls")), #<--ชื่อแอพ
+]
+```
 
-ตรวจสอบว่า install สำเร็จหรือไม่ด้วย command
+project_name/settings.py
 
-    python -m django --version
-**สร้าง project ชื่อ  `mysite`  ด้วย command**
+```python
 
-    django-admin startproject mysite
-**Runserver**
+# Database setting
 
-    python manage.py runserver
-**ทำการสร้าง Apps**
+DATABASES = {
+	"default": {
+			"ENGINE": "django.db.backends.postgresql",
+			"NAME": "db_name",
+			"USER": "postgres",
+			"PASSWORD": "1234",
+			"HOST": "localhost",
+			"PORT": "5432",
+	}
+}
 
-    python manage.py startapp polls
+# Add app blogs to INSTALLED_APPS
+
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "django_extensions",
+    #'django.contrib.humanize',
+    "employee",
+]
+
+STATIC_URL = 'static/'
+import os
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+TEMPLATE_DIRS = (
+    os.path.join(SETTINGS_PATH, 'templates'),
+)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+```
+
+# jupyter notebook
+
+```python
+import os
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
+
+#EX
+from blogs.models import Blog
+for blog in Blog.objects.all():
+    print(blog)
+```
