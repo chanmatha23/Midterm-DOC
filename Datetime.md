@@ -166,3 +166,86 @@ True
 >>> timezone.is_aware(dt2_aware)
 True
 ```
+
+
+### 1. Query ข้อมูลที่สร้างขึ้นในช่วง 24 ชั่วโมงที่ผ่านมา
+
+    from datetime import datetime, timedelta
+    from django.utils import timezone
+    
+    # กำหนดเวลาปัจจุบันตาม timezone ของโปรเจค
+    now = timezone.now()
+    
+    # เวลาที่ผ่านมา 24 ชั่วโมง
+    yesterday = now - timedelta(days=1)
+    
+    # Query ข้อมูลที่สร้างขึ้นในช่วง 24 ชั่วโมงที่ผ่านมา
+    recent_entries = MyModel.objects.filter(created_at__gte=yesterday)` 
+    
+### 2. Query ข้อมูลที่เกิดในช่วง 7 วันข้างหน้า
+
+    from datetime import datetime, timedelta
+    from django.utils import timezone
+    
+    # กำหนดเวลาปัจจุบันตาม timezone ของโปรเจค
+    now = timezone.now()
+    
+    # เวลาที่จะเกิดใน 7 วันข้างหน้า
+    seven_days_later = now + timedelta(days=7)
+    
+    # Query ข้อมูลที่จะเกิดในช่วง 7 วันข้างหน้า
+    upcoming_entries = MyModel.objects.filter(event_date__lte=seven_days_later)`
+### 3. Query ข้อมูลที่สร้างขึ้นในช่วงสัปดาห์นี้ (เริ่มจากวันจันทร์)
+
+    from datetime import datetime, timedelta
+    from django.utils import timezone
+    
+    # กำหนดเวลาปัจจุบันตาม timezone ของโปรเจค
+    now = timezone.now()
+    
+    # กำหนดวันเริ่มต้นของสัปดาห์ (วันจันทร์)
+    start_of_week = now - timedelta(days=now.weekday())
+    
+    # Query ข้อมูลที่สร้างขึ้นในช่วงสัปดาห์นี้
+    this_week_entries = MyModel.objects.filter(created_at__gte=start_of_week)`
+### 4. Query ข้อมูลที่ถูกอัพเดทในช่วง 30 นาทีที่ผ่านมา
+    from datetime import datetime, timedelta
+    from django.utils import timezone
+    
+    # กำหนดเวลาปัจจุบันตาม timezone ของโปรเจค
+    now = timezone.now()
+    
+    # เวลาที่ผ่านมา 30 นาที
+    thirty_minutes_ago = now - timedelta(minutes=30)
+    
+    # Query ข้อมูลที่ถูกอัพเดทในช่วง 30 นาทีที่ผ่านมา
+    recently_updated_entries = MyModel.objects.filter(updated_at__gte=thirty_minutes_ago)`
+### 5. Query ข้อมูลที่เกิดในช่วงวันเดียวกันของปีที่แล้ว
+
+    from datetime import datetime, timedelta
+    from django.utils import timezone
+    
+    # กำหนดเวลาปัจจุบันตาม timezone ของโปรเจค
+    now = timezone.now()
+    
+    # กำหนดเวลาของปีที่แล้วในวันเดียวกัน
+    last_year_today = now - timedelta(days=365)
+    
+    # Query ข้อมูลที่เกิดในวันเดียวกันของปีที่แล้ว
+    last_year_entries = MyModel.objects.filter(event_date__date=last_year_today.date())`
+### ใช้ Zoneinfo
+
+
+    from datetime import datetime, timedelta
+    from zoneinfo import ZoneInfo
+    
+    
+    # เวลาปัจจุบันในเขตเวลาที่กำหนด
+    now = datetime.now(tzinfo = ZoneInfo('Asia/Bangkok'))
+    
+    # เวลาที่ผ่านมา 24 ชั่วโมง
+    yesterday = now - timedelta(days=1)
+    
+    # Query ข้อมูลที่สร้างขึ้นในช่วง 24 ชั่วโมงที่ผ่านมา
+    recent_entries = MyModel.objects.filter(created_at__gte=yesterday)`
+
