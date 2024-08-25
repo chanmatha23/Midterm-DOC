@@ -74,12 +74,8 @@ INSTALLED_APPS = [
     "employee",
 ]
 
-STATIC_URL = 'static/'
-import os
-SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
-TEMPLATE_DIRS = (
-    os.path.join(SETTINGS_PATH, 'templates'),
-)
+STATIC_URL = "static/"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
