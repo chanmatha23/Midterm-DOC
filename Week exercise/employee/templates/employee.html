@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Employee
+{% endblock %}
+
+{% block nav %}
+{% include 'nav.html' %}
+{% endblock %}
+
+{% block head %}
+    <div class="head" style="padding: 10px; display: flex;justify-content: space-between;">
+        <h1>Employee</h1>
+        <div class>
+            <h1>Total {{emp.count}} People</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<main style="padding: 10px;">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Genger</th>
+                <th>Birth Date</th>
+                <th>Hire Date</th>
+                <th>Salary</th>
+                <th>Department</th>
+                <th>Position</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for emp in emp%}
+            <tr {% if forloop.first or forloop.last %} style="color: red;" {% endif %}>
+                <!-- employee id -->
+                <td>{{emp.id}}</td> 
+                <!-- ชื่อ นามสกุล -->
+                <td>{{emp.first_name}}  {{emp.first_name}}</td>
+                <!-- เพศ -->
+                <td>
+                {% if emp.gender == "M" %}
+                    Male
+                {% elif emp.gender == "F" %}
+                    Female
+                {% else %}
+                    Other
+                {% endif %}
+                </td>
+                <!-- วันเกิด -->
+                <td>{{emp.birth_date | date:"d/m/Y"}}</td>
+                <!-- วันเริ่มงาน -->
+                <td>{{emp.hire_date | date:"d/m/Y"}}</td>
+                <!-- เงินเดือน -->
+                {% load humanize %}
+                <td>{{emp.salary | intcomma }}</td>
+                <!-- แผนก -->
+                <td>{{emp.position.department.name}}</td>
+                <!-- ตำแหน่งงาน -->
+                <td>{{emp.position.name}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>there's no data</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

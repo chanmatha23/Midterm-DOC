@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Employee
+{% endblock %}
+
+{% block nav %}
+{% include 'nav.html' %}
+{% endblock %}
+{% block content %}
+<main>
+    <div style="padding: 20px;">
+        <h1>Project Detail</h1>
+
+        <form class="form" id="project-form" method="post" style="margin-top: 15px;">
+
+            <label for="">Project Name</label>
+            <!-- กำหนด value เป็นชื่อ โปรเจค -->
+            <input type="text" placeholder="project name" value="{{ pro.name }}">
+            
+            <label for="">Description</label>
+            <!-- รายละเอียกของโปรเจค -->
+            <textarea placeholder="description" rows="4"> {{ pro.description }} </textarea>
+
+            <!-- 
+                start_date และ due_date ต้องจัดให้อยู่ในรูปแบบ %Y-%m-%d โดยใช้ strftime ใน view ก่อนนำมาใช้
+                แนะนำให้ส่งแยก key
+            -->
+            <label for="">Start Date</label>
+            <input 
+                type="date" placeholder="start-date"
+                style="width: 150px;" 
+                value="{{ start }}" 
+            >
+            <label for="">Due Date</label>
+            <input 
+                type="date" 
+                placeholder="due-date" 
+                style="width: 150px;" 
+                value="{{ due }}"
+            >
+
+            <label for="">Project Manager</label>
+            <select style="width: 320px; height: 50px;">
+                <!-- กำหนด value เป็น id ของ manager และแสดงชื่อเต็มของ manager -->
+                <option value="{{ pro.manager_id }}">{{pro.manager.first_name}} {{pro.manager.last_name}}</option>
+            </select>
+        </form>
+    </div>
+
+    <br />
+    <br />
+    <div style="padding: 20px">
+        <div class="head" style="display: flex; justify-content: space-between; padding: 5px;">
+            <h2>Employee in this project</h2>
+
+            <div class="action">
+                <div id="add-staff">
+                    <input type="text" name="emp_id" id="input-add-staff" placeholder="EMPLOYEE ID">
+                    <button type="submit" onclick="addStaff({{pro.id}}, '{{csrf_token}}')">ADD</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="itemGroup">
+            {% for obj in staff %}
+            <div class="item">
+                <!-- id ของพนักงาน ชื่อ นามสกุล -->
+                <div>{{obj.id}}. {{obj.first_name}} {{obj.last_name}}</div>
+
+                <!-- position name -->
+                <div>{{ obj.position.name }}</div>
+                <div class="action">
+
+                    <!-- function removeStaff ให้ส่ง id ของพนักงาน เช่น removeStaff(Number('{{ staff.id }}'))-->
+                    <button type="submit" class="delete" onclick="removeStaff({{ pro.id }}, {{ obj.id }}, '{{csrf_token}}')">Kick this Staff</button>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+
+{% load static %}
+<script src="{% static 'manage_staff.js' %}"></script>
+
+{% endblock %}

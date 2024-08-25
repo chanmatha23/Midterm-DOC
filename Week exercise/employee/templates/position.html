@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Position
+{% endblock %}
+
+{% block nav %}
+{% include 'nav.html' %}
+{% endblock %}
+
+{% block head %}
+<div class="head" style="padding: 10px;">
+    <h1>Position</h1>
+</div>
+{% endblock %}
+{% block content %}
+<main style="padding: 10px;">
+    <!-- กำหนด if และ for ให้ถูกต้อง -->
+        {% for obj in pos%}
+    <div class="itemGroup">
+        <div class="item">
+            <!-- position id และ ชื่อตำแหน่ง -->
+            <div>{{obj.id}}. {{obj.name}}</div>
+
+            <!-- จำนวนพนักงานทั้งหมด -->
+            <div class="action">{{obj.count}} People</div>
+        </div>
+    </div>
+    {% endfor %}
+</main>
+{% endblock %}

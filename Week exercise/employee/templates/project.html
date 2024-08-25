@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Employee
+{% endblock %}
+
+{% block nav %}
+{% include 'nav.html' %}
+{% endblock %}
+
+{% block head %}
+    <div class="head" style="padding: 10px;">
+        <h1>Project</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="itemGroup">
+            {% for obj in pro%}
+            <div class="item">
+                <!-- โปรเจค id และ ชื่อ -->
+                <div>{{obj.id}}. {{obj.name}}</div>
+
+                <!-- วันเริ่ม และ วันกำหนดส่งโปรเจค -->
+                <div>{{obj.start_date}} - {{obj.due_date}}</div>
+
+                <div class="action">
+                    <!-- กำหนด path ให้ถูกต้อง -->
+                    <a href="{% url 'projectdetail' id=obj.id %}" class="edit btn">แก้ไข</a>
+                    
+                    <!-- ถ้า code มันแจ้งเตือนอะไรก็ปล่อยไปนะครับไม่มีผลอะไร  -->
+                    <button type="submit" onclick="deleteProject({{obj.id}}, '{{csrf_token}}')" class="delete">Delete</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </main>
+{% endblock %}
+{% block script %}
+{% load static %}
+<script src="{% static 'project.js' %}"></script>
+{% endblock %}
