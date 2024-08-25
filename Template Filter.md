@@ -1,3 +1,4 @@
+
 # Filter
 ## django.contrib.humanize
 ต้องเพิ่ม `django.contrib.humanize` ใน install ก่อน 
@@ -90,3 +91,67 @@ Examples:
     {% endif %}
 
 ในตัวอย่างนี้ ถ้า `value` สามารถหารด้วย 3 ลงตัว (เช่น 3, 6, 9 เป็นต้น) ส่วนที่อยู่ใน `{% if %}` จะถูกแสดงผลว่า "9 is divisible by 3." หากไม่สามารถหารลงตัวได้ ก็จะแสดงส่วนที่อยู่ใน `{% else %}`
+
+
+### `add`
+It is used to add an argument to the value.  **Example**
+
+    {{ value | add:"2" }}
+### `addslashes`
+It is used to add slashes before quotes. Useful for escaping strings in CSV.  **Example**
+
+    {{ value | addslashes }}
+
+If value is “I’m Jai”, the output will be “I\’m Jai”.
+### `capfirst`
+ถ้า Value คือ "hello world"
+
+	{% load humanize %}
+    
+    {{ text|capfirst }} 
+    
+    ในกรณีนี้ ผลลัพธ์ที่ได้จะเป็น:
+    
+    `Hello world`
+
+### `cut`
+
+It is used to remove all values of arg from the given string.  **Example**
+
+    {{ value | cut:" " }}
+
+If value is “String with spaces”, the output will be “Stringwithspaces”.
+
+### `dictsort`
+
+It takes a list of dictionaries and returns that list sorted by the key given in the argument.  **Example**
+
+    {{ value | dictsort:"name" }}
+
+If value is:
+
+    [
+        {'name': 'zed', 'age': 19},
+        {'name': 'amy', 'age': 22},
+        {'name': 'joe', 'age': 31},
+    ]
+
+then the output would be:
+
+    [
+        {'name': 'zed', 'age': 19},
+        {'name': 'amy', 'age': 22},
+        {'name': 'joe', 'age': 31},
+    ]
+### `join`
+
+It is used to join a list with a string, like Python’s str.join(list)  **Example**
+
+    {{ value | join:" // " }}
+
+If value is the list [‘a’, ‘b’, ‘c’], the output will be the string “a // b // c”.
+
+#### linenumbers
+It is used to display text with line numbers.  **Example**
+
+    {{ value | linenumbers }}
