@@ -172,3 +172,35 @@ Dictionaries can be sorted using the  `dictsort`  filter.
 Some filters require variables of a certain data type.
 
     {{ date_time | time"H": "i" }}
+
+## Raising a 404 error
+
+
+    from django.http import HttpResponse, Http404
+    from django.shortcuts import render
+    from .models import Question
+    from django.db import DatabaseError
+    
+    def detail(request, question_id):
+        try: 
+	        question = Question.objects.get(pk=question_id) 
+        except Question.DoesNotExist: 
+	        return HttpResponseNotFound("<h1>Question does not exist</h1>") 
+        return render(request, "detail.html", {"question": question})
+
+
+## Others
+
+
+    from django.http import Http404, HttpResponse
+    from django.db import DatabaseError
+    from .models import Question
+    
+    def detail(request, question_id):
+        try:
+            question = Question.objects.get(pk=question_id)
+        except Question.DoesNotExist:
+            raise Http404("Question does not exist")
+        except DatabaseError:
+            return HttpResponse("Database error occurred. Please try again later.")
+        return render(request, "detail.html", {"question": question})
