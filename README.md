@@ -1,6 +1,7 @@
 
 ![enter image description here](https://cms.dmpcdn.com/horoscope/2023/10/16/e0369f30-6bdb-11ee-8cd0-a9bfd91f001c_webp_original.webp)
-
+## Install PIP
+python -m pip install --upgrade pip
 ## Install virtualenv
 
 
